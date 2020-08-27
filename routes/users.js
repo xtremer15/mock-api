@@ -38,7 +38,6 @@ const userRoutes = (app, fs) => {
 
   // CREATE
   app.post('/users', (req, res) => {
-
     readFile(data => {
         const newUserId = Object.keys(data).length + 1;
 
@@ -46,7 +45,7 @@ const userRoutes = (app, fs) => {
         data[newUserId.toString()] = req.body;
 
         writeFile(JSON.stringify(data, null, 2), () => {
-          res.status(200).send('new user added');
+          res.status(200).send(`New user added with ${userId}`);
         });
       },
       true);
@@ -63,7 +62,7 @@ const userRoutes = (app, fs) => {
         data[userId] = req.body;
 
         writeFile(JSON.stringify(data, null, 2), () => {
-          res.status(200).send(`users id:${userId} updated`);
+          res.status(200).send(`User id:${userId} updated`);
         });
       },
       true);
@@ -80,7 +79,7 @@ const userRoutes = (app, fs) => {
         delete data[userId];
 
         writeFile(JSON.stringify(data, null, 2), () => {
-          res.status(200).send(`users id:${userId} removed`);
+          res.status(200).send(`User id:${userId} removed`);
         });
       },
       true);
